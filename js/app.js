@@ -39,7 +39,7 @@ Duck.prototype.render = function () {
   img.src = this.pathOfImage;
   img.id = this.name;
   img.alt = this.name;
-  img.nameOfClass = "duck-products-displayed";
+  img.nameOfClass = 'duck-products-displayed';
 
   p.innerText = this.timesImageClicked;
 
@@ -105,18 +105,18 @@ function renderThreeDuck(array) {
 
 function addEventListener(array) {
   for (let image of array) {
-    image.addEventListener('click', handleClick)
+    image.addEventListener('click', handleClick);
   }
 }
 
 renderThreeDuck(oddDuckSelectionProduct);
 
 let renderedDucks = document.querySelectorAll('img');
-console.log(renderedDucks)
+console.log(renderedDucks);
 
 function handleClick (event) {
   if (userVoteRounds > 0) {
-    console.log(event.target.id)
+    console.log(event.target.id);
     oddDuckSelectionProduct.forEach((duck) => {
       if (event.target.id === duck.name) {
         duck.timesImageClicked++;
