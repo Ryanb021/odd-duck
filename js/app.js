@@ -74,3 +74,83 @@ new Duck('wine-glass', 'wine-glass.jpg');
 function produceRandomDuck() {
   return Math.floor(Math.random() * oddDuckSelectionProduct.length);
 }
+
+function renderThreeDuck(array) {
+
+  let randomDucks = [];
+
+  for (let i=0; i < 3; i++) {
+    randomDucks[i] = array[produceRandomDuck()];
+  }
+
+  while (randomDucks[0] === randomDucks[1]) {
+    randomDucks[0] = array[produceRandomDuck()];
+  }
+
+  while (randomDucks[1] === randomDucks[2]) {
+    randomDucks[1] = array[produceRandomDuck()];
+  }
+
+  while (randomDucks[0] === randomDucks[2]) {
+    randomDucks[2] = array[produceRandomDuck()];
+  }
+
+  for (let duck of randomDucks) {
+    duck.render();
+
+  }
+}
+
+//Add eventlistener
+
+function addEventListener(array) {
+  for (let image of array) {
+    image.addEventListener('click', handleClick)
+  }
+}
+
+renderThreeDuck(oddDuckSelectionProduct);
+
+let renderedDucks = document.querySelectorAll('img');
+console.log(renderedDucks)
+
+function handleClick (event) {
+  if (userVoteRounds > 0) {
+    console.log(event.target.id)
+    oddDuckSelectionProduct.forEach((duck) => {
+      if (event.target.id === duck.name) {
+        duck.timesImageClicked++;
+      }
+    });
+
+    userVoteRounds -= 1;
+    duckSectionElement.innerHTML = '';
+    renderThreeDuck(oddDuckSelectionProduct);
+    renderedDucks = document.querySelectorAll('img');
+    addEventListener(renderedDucks);
+  }
+}
+
+function handleClickResults() {
+  let ul = document.createElement('ul');
+  let liItems = [];
+
+  userVotingResults.innerHTML = '';
+
+  for (let i = 0; i < oddDuckSelectionProduct.length; i++) {
+    let li = document.createElement('li');
+
+    liItems[i] = `${oddDuckSelectionProduct[i].timesImageClicked} votes, and was shown ${oddDuckSelectionProduct[i].timesImageShown} times.`;
+
+    li.innerText = liItems[i];
+
+    ul.appendChild(li);
+  }
+
+  userVotingResults.append(ul);
+
+}
+
+votingButtonElement.addEventListener('click', handleClickResults);
+
+addEventListener(renderedDucks);
