@@ -1,0 +1,40 @@
+#user-voting-container {
+  
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px auto;
+
+}
+#odd-ducks-products-container {
+
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  grid-template-rows: 100px;
+
+}
+.duck-products-displayed {
+
+  height: 80%;
+  width: 40%;
+  margin: 20px auto;
+
+}
+
+#button-container {
+  text-align: center;
+  margin: 20px auto;
+
+}
+
+#button-container button {
+  padding: 5px;
+
+}
+
+#voting-results-container {
+  margin: 10px auto;
+  text-align: center;
+}
