@@ -71,6 +71,6 @@ new Duck('tauntaun', 'tauntaun.jpg');
 new Duck('water-can', 'water-can.jpg');
 new Duck('wine-glass', 'wine-glass.jpg');
 
-function produceRandomDuckc() {
+function produceRandomDuck() {
   return Math.floor(Math.random() * oddDuckSelectionProduct.length);
-};
+}
