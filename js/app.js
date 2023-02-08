@@ -6,29 +6,42 @@ Create a constructor function that creates an object associated with each produc
 -File path of image
 -Times the image has been shown
 */
-console.log('Wassup mah man?');
-
+//console.log('Wassup mah man?');
+//Global Lists
+let listOfProducks = new Array();
+let listOfPastRender = new Array();
+let listOfUsedProducks = new Array();
+let listOfRandomProducksToRender = new Array();
 
 //Global Variables
-let oddDuckSelectionProduct = [];
+let userVoteRounds = 25;
+
+//DOM Elements
 let userVotingElement = document.getElementById('user-voting-container');
 let duckSectionElement = document.getElementById('odd-ducks-products-container');
 let votingButtonElement = document.getElementById('voting-button-container');
 let userVotingResults = document.getElementById('voting-results-container');
-let userVoteRounds = 25;
+let canvasElement = document.getElementById('myChart');
+
+let myChart = null;
+
+// get random number, if image get from random number, while loop run 6 times, use random number to fill array, if array does not already include the random product, push it to rendering array of 6 unique items, 
+
+
 
 //Constructor for odd ducks, path of image???
-function Duck(name, pathOfImage) {
+// if product[1] !== product[2] && product[1] !== product[3]
+function Produck(name, pathOfImage) {
   this.name = name;
   this.pathOfImage = `img/${pathOfImage}`;
   this.timesImageShown = 0;
   this.timesImageClicked = 0;
-  oddDuckSelectionProduct.push(this);
+  listOfProducks.push(this);
 }
 
 //Voting Generator
 
-Duck.prototype.render = function () {
+Produck.prototype.render = function () {
 
   let numberOfVotes = document.createElement('h1');
   let img = document.createElement('img');
@@ -53,68 +66,164 @@ Duck.prototype.render = function () {
 };
 
 //duck instances, constructor, generate random ducks???
-new Duck('bag', 'bag.jpg');
-new Duck('banana', 'banana.jpg');
-new Duck('bathroom', 'bathroom.jpg');
-new Duck('boots', 'boots.jpg');
-new Duck('breakfast', 'breakfast.jpg');
-new Duck('chair', 'chair.jpg');
-new Duck('cthulhu', 'cthulhu.jpg');
-new Duck('dog-duck', 'dog-duck.jpg');
-new Duck('dragon', 'dragon.jpg');
-new Duck('pen', 'pen.jpg');
-new Duck('pet-sweep', 'pet-sweep.jpg');
-new Duck('scissors', 'scissors.jpg');
-new Duck('shark', 'shark.jpg');
-new Duck('sweep', 'sweep.png');
-new Duck('tauntaun', 'tauntaun.jpg');
-new Duck('water-can', 'water-can.jpg');
-new Duck('wine-glass', 'wine-glass.jpg');
+new Produck('bag', 'bag.jpg');
+new Produck('banana', 'banana.jpg');
+new Produck('bathroom', 'bathroom.jpg');
+new Produck('boots', 'boots.jpg');
+new Produck('breakfast', 'breakfast.jpg');
+new Produck('chair', 'chair.jpg');
+new Produck('cthulhu', 'cthulhu.jpg');
+new Produck('dog-duck', 'dog-duck.jpg');
+new Produck('dragon', 'dragon.jpg');
+new Produck('pen', 'pen.jpg');
+new Produck('pet-sweep', 'pet-sweep.jpg');
+new Produck('scissors', 'scissors.jpg');
+new Produck('shark', 'shark.jpg');
+new Produck('sweep', 'sweep.png');
+new Produck('tauntaun', 'tauntaun.jpg');
+new Produck('water-can', 'water-can.jpg');
+new Produck('wine-glass', 'wine-glass.jpg');
 
 function produceRandomDuck() {
-  return Math.floor(Math.random() * oddDuckSelectionProduct.length);
+  return Math.floor(Math.random() * listOfProducks.length);
+}
+
+function compareArrays(firstArray, secondArray) {
+  console.log(firstArray.some(product => secondArray.includes(product)));
+
+  return firstArray.some(product => secondArray.includes(product));
 }
 
 function renderThreeDuck(array) {
 
-  let randomDucks = [];
+  //let randomDucks = [];
+  console.log(`start of get renderThree function: ${listOfUsedProducks}`);
 
-  for (let i=0; i < 3; i++) {
-    randomDucks[i] = array[produceRandomDuck()];
+  listOfRandomProducksToRender = [];
+
+  for (let i = 0; i < 3; i++) {
+    listOfRandomProducksToRender[i] = array[produceRandomDuck()];
   }
 
-  while (randomDucks[0] === randomDucks[1]) {
-    randomDucks[0] = array[produceRandomDuck()];
+  while (listOfRandomProducksToRender[0] === listOfRandomProducksToRender[1]) {
+    listOfRandomProducksToRender[0] = array[produceRandomDuck()];
   }
 
-  while (randomDucks[1] === randomDucks[2]) {
-    randomDucks[1] = array[produceRandomDuck()];
+  while (listOfRandomProducksToRender[1] === listOfRandomProducksToRender[2]) {
+    listOfRandomProducksToRender[1] = array[produceRandomDuck()];
   }
 
-  while (randomDucks[0] === randomDucks[2]) {
-    randomDucks[2] = array[produceRandomDuck()];
+  while (listOfRandomProducksToRender[0] === listOfRandomProducksToRender[2]) {
+    listOfRandomProducksToRender[2] = array[produceRandomDuck()];
   }
 
-  for (let duck of randomDucks) {
-    duck.render();
+  listOfUsedProducks = [...listOfRandomProducksToRender];
 
+  /*for (let duck of randomDucks) {
+    duck.render();*/
+
+}
+
+function renderRandomThree(array) {
+
+  for (let product of array) {
+    console.log(`product rendered: ${product.name}`);
+    product.render();
   }
 }
+
 
 //Add eventlistener
 
 function addEventListener(array) {
-  for (let image of array) {
-    image.addEventListener('click', handleClick);
+  for (let item of array) {
+    item.addEventListener('click', handleClick);
   }
 }
 
+function handleClick(event) {
+  if (userVoteRounds > 0) {
+    listOfProducks.forEach((product) => {
+      if (event.target.id === product.name) {
+        product.timesImageClicked++;
+      }
+    });
+
+    listOfPastRender = [...listOfProducks];
+
+    userVoteRounds -= 1;
+    duckSectionElement.innerHTML = '';
+
+    renderThreeDuck(listOfProducks);
+
+    while (compareArrays(listOfPastRender, listOfRandomProducksToRender)) {
+      renderThreeDuck(listOfProducks);
+    }
+
+    renderRandomThree(listOfRandomProducksToRender);
+
+    console.log(`list of prev img in click func AFTER renderrando3 func called: ${listOfPastRender[0]}`);
+
+    renderedElements = document.querySelectorAll('img');
+    addEventListener(renderedElements);
+  }
+}
+
+function handleClickResults() {
+
+  let clickData = [];
+  let viewData = [];
+  let nameValues = [];
+
+  for (let i = 0; i < listOfProducks.length; i++) {
+    nameValues.push(listOfProducks[i].name);
+    clickData.push(listOfProducks[i].timesImageClicked);
+    viewData.push(listOfProducks[i].timesImageShown);
+  }
+
+  if (userVoteRounds === 0) {
+    myChart = new Chart(canvasElement, {
+      type: 'bar',
+      data: {
+        labels: nameValues,
+        datasets: [{
+          label: '# of Votes',
+          data: clickData,
+          borderWidth: 1
+        }, {
+          label: '# of Views',
+          data: viewData,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  } else {
+    alert(`You have ${userVoteRounds} votes left!`);
+  }
+}
+
+renderThreeDuck(listOfProducks);
+renderRandomThree(listOfRandomProducksToRender);
+
+let renderedElements = document.querySelectorAll('img');
+addEventListener(renderedElements);
+votingButtonElement.addEventListener('click', handleClickResults);
+
+
+/*
 renderThreeDuck(oddDuckSelectionProduct);
 
 let renderedDucks = document.querySelectorAll('img');
 console.log(renderedDucks);
 
-function handleClick (event) {
+function handleClick(event) {
   if (userVoteRounds > 0) {
     console.log(event.target.id);
     oddDuckSelectionProduct.forEach((duck) => {
@@ -154,3 +263,4 @@ function handleClickResults() {
 votingButtonElement.addEventListener('click', handleClickResults);
 
 addEventListener(renderedDucks);
+*/
