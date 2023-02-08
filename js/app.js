@@ -149,7 +149,7 @@ function handleClick(event) {
       }
     });
 
-    listOfPastRender = [...listOfProducks];
+    listOfPastRender = [...listOfUsedProducks];
 
     userVoteRounds -= 1;
     duckSectionElement.innerHTML = '';
@@ -162,7 +162,7 @@ function handleClick(event) {
 
     renderRandomThree(listOfRandomProducksToRender);
 
-    console.log(`list of prev img in click func AFTER renderrando3 func called: ${listOfPastRender[0]}`);
+    //console.log(`list of prev img in click func AFTER renderrando3 func called: ${listOfPastRender[0]}`);
 
     renderedElements = document.querySelectorAll('img');
     addEventListener(renderedElements);
