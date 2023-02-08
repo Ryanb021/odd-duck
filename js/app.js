@@ -8,6 +8,7 @@ Create a constructor function that creates an object associated with each produc
 */
 //console.log('Wassup mah man?');
 //Global Lists
+
 let listOfProducks = new Array();
 let listOfPastRender = new Array();
 let listOfUsedProducks = new Array();
@@ -162,7 +163,7 @@ function handleClick(event) {
 
     renderRandomThree(listOfRandomProducksToRender);
 
-    //console.log(`list of prev img in click func AFTER renderrando3 func called: ${listOfPastRender[0]}`);
+    console.log(`list of prev img in click func AFTER renderrando3 func called: ${listOfPastRender[0]}`);
 
     renderedElements = document.querySelectorAll('img');
     addEventListener(renderedElements);
