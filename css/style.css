@@ -1,9 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  font-size: 5rem;
+  line-height: .8;
+  text-align: center;
+  margin: 1rem;
+  border: 1px solid black;
+
+}
+
+main {
+  width: 1024px;
+  margin: 3rem auto;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 6.5rem 10rem 20rem 40%;
+
+}
+
 #user-voting-container {
   
   font-size: large;
   font-weight: bold;
   text-align: center;
   margin: 20px auto;
+  grid-column-start: 2;
+  grid-column-end: 5;
+  grid-row-start: 4;
+  grid-row-end: 5;
 
 }
 #odd-ducks-products-container {
@@ -11,9 +42,21 @@
   align-items: center;
   justify-content: center;
   display: grid;
-  grid-template-columns: 200px 200px 200px;
-  grid-template-rows: 100px;
+  grid-template-columns: 10px 10px 10px;
+  grid-template-rows: 10px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 5;
+  justify-content: space-between;
+  padding: 1rem;
 
+}
+
+section img {
+  width: 200px;
+  max-height: 20rem;
+  border: 5px solid transparent;
 }
 .duck-products-displayed {
 
@@ -37,4 +80,18 @@
 #voting-results-container {
   margin: 10px auto;
   text-align: center;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 6;
+}
+
+footer {
+
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 6;
+  text-align: center;
+
 }

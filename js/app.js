@@ -59,7 +59,7 @@ new Duck('bathroom', 'bathroom.jpg');
 new Duck('boots', 'boots.jpg');
 new Duck('breakfast', 'breakfast.jpg');
 new Duck('chair', 'chair.jpg');
-new Duck('cthulhu', 'cthulhu,jpg');
+new Duck('cthulhu', 'cthulhu.jpg');
 new Duck('dog-duck', 'dog-duck.jpg');
 new Duck('dragon', 'dragon.jpg');
 new Duck('pen', 'pen.jpg');
