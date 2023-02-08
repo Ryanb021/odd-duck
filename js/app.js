@@ -140,7 +140,7 @@ function handleClickResults() {
   for (let i = 0; i < oddDuckSelectionProduct.length; i++) {
     let li = document.createElement('li');
 
-    liItems[i] = `${oddDuckSelectionProduct[i].timesImageClicked} votes, and was shown ${oddDuckSelectionProduct[i].timesImageShown} times.`;
+    liItems[i] = `${oddDuckSelectionProduct[i].timesImageClicked} vote/s for ${oddDuckSelectionProduct[i].name} and was shown ${oddDuckSelectionProduct[i].timesImageShown} times.`;
 
     li.innerText = liItems[i];
 
