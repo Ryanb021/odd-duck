@@ -8,6 +8,7 @@ Create a constructor function that creates an object associated with each produc
 */
 //console.log('Wassup mah man?');
 //Global Lists
+
 let listOfProducks = new Array();
 let listOfPastRender = new Array();
 let listOfUsedProducks = new Array();
@@ -149,7 +150,7 @@ function handleClick(event) {
       }
     });
 
-    listOfPastRender = [...listOfProducks];
+    listOfPastRender = [...listOfUsedProducks];
 
     userVoteRounds -= 1;
     duckSectionElement.innerHTML = '';
