@@ -42,8 +42,10 @@ let wineGlass = new Duck('wine-glass', 'img/wine-glass.jpg');
 //create array for all Ducks
 let listOfProducks = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass];
 
-//random number array
+//needs to be below the list
+pageLoad();
 
+//random number array
 let randomProducks = [];
 
 //random producks
@@ -121,6 +123,11 @@ let render = function () {
     newList.textContent = `${listOfProducks[j].numLike} votes, and was shown ${listOfProducks[j].numView} times.`;
     resultList.appendChild(newList);
   }
+
+  // save all data into a dataToString as string
+  let dataToString = JSON.stringify(listOfProducks);
+  console.log(dataToString);
+  localStorage(setItem)('saveAll', dataToString);
   viewResult.removeEventListener('click', render);
   finalChart();
 };
@@ -171,3 +178,14 @@ new Chart(duckChart, {
     }
   }
 });
+
+function pageLoad() {
+  let dataFromLocal = localStorage.getItem('saveAll');
+  console.log(dataFromLocal);
+  if (dataFromLocal) {
+    console.log(`data pull from storage ${dataFromLocal}`);
+    let parsedData = JSON.parse(dataFromLocal);
+    console.log(parsedData[0].name);
+    listOfProducks = parsedData;
+  }
+}
