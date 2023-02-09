@@ -143,7 +143,7 @@ let finalChart = function () {
 
 const duckChart = document.getElementById('myChart');
 
-new CharacterData(duckChart, {
+new Chart(duckChart, {
   type: 'bar',
   data: {
     labels: listDuckName,
