@@ -11,11 +11,11 @@ let picture2 = document.querySelector('#pictures img:nth-child(2)');
 let picture3 = document.querySelector('#pictures img:nth-child(3)');
 
 //constructor function for ducks
-function Duck(name, path) {
+function Duck(name, src, numView = 0, numLike = 0) {
   this.name = name;
-  this.path = path;
-  this.numView = 0;
-  this.numLike = 0;
+  this.src = src;
+  this.numView = numView;
+  this.numLike = numLike;
 }
 
 //duck instances, constructor, generate random ducks???
@@ -72,9 +72,9 @@ function renderProduckImage() {
   let pic3 = randomProducks.shift();
   console.log(`remove pic3 ${randomProducks}`);
 
-  picture1.path = listOfProducks[pic1].path;
-  picture2.path = listOfProducks[pic2].path;
-  picture3.path = listOfProducks[pic3].path;
+  picture1.src = listOfProducks[pic1].src;
+  picture2.src = listOfProducks[pic2].src;
+  picture3.src = listOfProducks[pic3].src;
 
   picture1.alt = listOfProducks[pic1].name;
   picture2.alt = listOfProducks[pic2].name;
@@ -120,7 +120,7 @@ pictures.addEventListener('click', userClick);
 let render = function () {
   for (let j = 0; j < listOfProducks.length; j++) {
     let newList = document.createElement('li');
-    newList.textContent = `${listOfProducks[j].numLike} votes, and was shown ${listOfProducks[j].numView} times.`;
+    newList.textContent = `${listOfProducks[j].name} has ${listOfProducks[j].numLike} votes, and was shown ${listOfProducks[j].numView} times.`;
     resultList.appendChild(newList);
   }
 
@@ -132,36 +132,35 @@ let render = function () {
   finalChart();
 };
 
-let viewResult = document.getElementById('view-result');
+let viewResult = document.getElementById('view');
 
 let finalChart = function () {
 
-  let listDuckName = [];
-  let listDuckView = [];
-  let listDuckLike = [];
+  let listName = [];
+  let listView = [];
+  let listLike = [];
 
   for (let l = 0; l < listOfProducks.length; l++) {
-    listDuckName.push(listOfProducks[l].name);
-    console.log(listDuckName);
-    listDuckView.push(listOfProducks[l].numView);
-    listDuckLike.push(listOfProducks[l].numLike);
+    listName.push(listOfProducks[l].name);
+    listView.push(listOfProducks[l].numView);
+    listLike.push(listOfProducks[l].numLike);
   }
 };
 
-const duckChart = document.getElementById('myChart');
+const chart = document.getElementById('myChart');
 
-new Chart(duckChart, {
+new Chart(chart, {
   type: 'bar',
   data: {
-    labels: listDuckName,
+    labels: listName,
     datasets: [{
       label: '# of Views',
-      data: listDuckView,
+      data: listView,
       borderWidth: 1
     },
     {
       label: '# of Likes',
-      data: listDuckLike,
+      data: listLike,
       borderWidth: 1
     }]
   },
