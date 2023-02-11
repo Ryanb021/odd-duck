@@ -112,7 +112,7 @@ let userClick = function (event) {
     viewResult.addEventListener('click', render);
     renderProduckImage();
   }
-};
+}
 
 pictures.addEventListener('click', userClick);
 
@@ -130,7 +130,8 @@ let render = function () {
   localStorage(setItem)('saveAll', dataToString);
   viewResult.removeEventListener('click', render);
   finalChart();
-};
+}
+
 
 let viewResult = document.getElementById('view');
 
@@ -145,7 +146,7 @@ let finalChart = function () {
     listView.push(listOfProducks[l].numView);
     listLike.push(listOfProducks[l].numLike);
   }
-};
+}
 
 const chart = document.getElementById('myChart');
 
@@ -176,7 +177,7 @@ new Chart(chart, {
       }
     }
   }
-});
+})
 
 function pageLoad() {
   let dataFromLocal = localStorage.getItem('saveAll');
