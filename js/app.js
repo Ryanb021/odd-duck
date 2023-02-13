@@ -11,9 +11,9 @@ let picture2 = document.querySelector('#pictures img:nth-child(2)');
 let picture3 = document.querySelector('#pictures img:nth-child(3)');
 
 //constructor function for ducks
-function Duck(name, path) {
+function Duck(name, src) {
   this.name = name;
-  this.path = path;
+  this.src = src;
   this.numView = 0;
   this.numLike = 0;
 }
@@ -72,9 +72,9 @@ function renderProduckImage() {
   let pic3 = randomProducks.shift();
   console.log(`remove pic3 ${randomProducks}`);
 
-  picture1.path = listOfProducks[pic1].path;
-  picture2.path = listOfProducks[pic2].path;
-  picture3.path = listOfProducks[pic3].path;
+  picture1.src = listOfProducks[pic1].src;
+  picture2.src = listOfProducks[pic2].src;
+  picture3.src = listOfProducks[pic3].src;
 
   picture1.alt = listOfProducks[pic1].name;
   picture2.alt = listOfProducks[pic2].name;
@@ -148,9 +148,9 @@ let finalChart = function () {
   }
 };
 
-const duckChart = document.getElementById('myChart');
+const chart = document.getElementById('myChart');
 
-new Chart(duckChart, {
+new Chart(chart, {
   type: 'bar',
   data: {
     labels: listDuckName,
