@@ -177,7 +177,8 @@ new Chart(chart, {
       }
     }
   }
-})
+});
+console.log(Chart);
 
 function pageLoad() {
   let dataFromLocal = localStorage.getItem('saveAll');
