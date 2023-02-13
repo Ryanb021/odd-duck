@@ -1,191 +1,219 @@
 'use strict';
 
-//remaining votes
+
+
+// how many rounds of voting
 
 let vote = 0;
-let userVote = 25;
+let maxVote = 25;
 
-//pictures to render
-let picture1 = document.querySelector('#pictures img:first-child');
-let picture2 = document.querySelector('#pictures img:nth-child(2)');
-let picture3 = document.querySelector('#pictures img:nth-child(3)');
+// Render img
+let image1 = document.querySelector('#img img:first-child');
+let image2 = document.querySelector('#img img:nth-child(2)');
+let image3 = document.querySelector('#img img:nth-child(3)');
 
-//constructor function for ducks
-function Duck(name, src) {
+
+//constructor function for item
+// view, like are optional and default, doeesnt need an input
+function Item(name, src, view = 0, like = 0) {
   this.name = name;
   this.src = src;
-  this.numView = 0;
-  this.numLike = 0;
+  // this.src = `img/${name}.jpg`;
+  this.view = view;
+  this.like = like;
 }
 
-//duck instances, constructor, generate random ducks???
-let bag = new Duck('bag', 'img/bag.jpg');
-let banana = new Duck('banana', 'img/banana.jpg');
-let bathroom = new Duck('bathroom', 'img/bathroom.jpg');
-let boots = new Duck('boots', 'img/boots.jpg');
-let breakfast = new Duck('breakfast', 'img/breakfast.jpg');
-let bubblegum = new Duck('bubblegum', 'img/bubblegum.jpg');
-let chair = new Duck('chair', 'img/chair.jpg');
-let cthulhu = new Duck('cthulhu', 'img/cthulhu.jpg');
-let dogDuck = new Duck('dog-duck', 'img/dog-duck.jpg');
-let dragon = new Duck('dragon', 'img/dragon.jpg');
-let pen = new Duck('pen', 'img/pen.jpg');
-let petSweep = new Duck('pet-sweep', 'img/pet-sweep.jpg');
-let scissors = new Duck('scissors', 'img/scissors.jpg');
-let shark = new Duck('shark', 'img/shark.jpg');
-let sweep = new Duck('sweep', 'img/sweep.png');
-let tauntaun = new Duck('tauntaun', 'img/tauntaun.jpg');
-let unicorn = new Duck('unicorn', 'img/unicorn.jpg');
-let waterCan = new Duck('water-can', 'img/water-can.jpg');
-let wineGlass = new Duck('wine-glass', 'img/wine-glass.jpg');
 
-//create array for all Ducks
-let listOfProducks = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass];
 
-//needs to be below the list
+
+//all items
+
+let bag = new Item('bag', 'img/bag.jpg');
+let banana = new Item('banana', 'img/banana.jpg');
+let bathroom = new Item('bathroom', 'img/bathroom.jpg');
+let boots = new Item('boots', 'img/boots.jpg');
+let breakfast = new Item('breakfast', 'img/breakfast.jpg');
+let bubblegum = new Item('bubblegum', 'img/bubblegum.jpg');
+let chair = new Item('chair', 'img/chair.jpg');
+let cthulhu = new Item('cthulhu', 'img/cthulhu.jpg');
+let dogDuck = new Item('dog-duck', 'img/dog-duck.jpg');
+let dragon = new Item('dragon', 'img/dragon.jpg');
+let pen = new Item('pen', 'img/pen.jpg');
+let petSweep = new Item('pet-sweep', 'img/pet-sweep.jpg');
+let scissors = new Item('scissors', 'img/scissors.jpg');
+let shark = new Item('shark', 'img/shark.jpg');
+let sweep = new Item('sweep', 'img/sweep.png');
+let tauntaun = new Item('tauntaun', 'img/tauntaun.jpg');
+let unicorn = new Item('unicorn', 'img/unicorn.jpg');
+let waterCan = new Item('water-can', 'img/water-can.jpg');
+let wineGlass = new Item('wine-glass', 'img/wine-glass.jpg');
+
+// all product in an array
+let list = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass];
+
+// needs to be below the list, so it exist
 pageLoad();
 
-//random number array
-let randomProducks = [];
 
-//random producks
+// setup a random number array for unique number use
+let rngNoAr = [];
 
-function generateRandomDucks() {
-  return Math.floor(Math.random() * listOfProducks.length);
+
+//Random no
+function rng() {
+  return Math.floor(Math.random() * list.length);
 }
 
-//render new image not using previous pictures already shown
+// new render img function where the next rotation won't have previous imgs
 
-function renderProduckImage() {
-  while (randomProducks.length < 6) {
-    let randomPics = generateRandomDucks();
-    if (!randomProducks.includes(randomPics)) {
-      randomProducks.push(randomPics);
-      console.log(`after check ${randomProducks}`);
+
+function renderImg() {
+  while (rngNoAr.length < 6) {
+    let randomNo = rng();
+    if (!rngNoAr.includes(randomNo)) {
+      rngNoAr.push(randomNo);
+      console.log(`after check ${rngNoAr}`);
     }
   }
-
-  let pic1 = randomProducks.shift();
-  console.log(`remove pic1 ${randomProducks}`);
-  let pic2 = randomProducks.shift();
-  console.log(`remove pic2 ${randomProducks}`);
-  let pic3 = randomProducks.shift();
-  console.log(`remove pic3 ${randomProducks}`);
-
-  picture1.src = listOfProducks[pic1].src;
-  picture2.src = listOfProducks[pic2].src;
-  picture3.src = listOfProducks[pic3].src;
-
-  picture1.alt = listOfProducks[pic1].name;
-  picture2.alt = listOfProducks[pic2].name;
-  picture3.alt = listOfProducks[pic3].name;
-
-  listOfProducks[pic1].numView++;
-  listOfProducks[pic2].numView++;
-  listOfProducks[pic3].numView++;
+  let no1 = rngNoAr.shift();
+  console.log(`take out no1 ${rngNoAr}`);
+  let no2 = rngNoAr.shift();
+  console.log(`take out no2 ${rngNoAr}`);
+  let no3 = rngNoAr.shift();
+  console.log(`take out no3 ${rngNoAr}`);
+  image1.src = list[no1].src;
+  image2.src = list[no2].src;
+  image3.src = list[no3].src;
+  image1.alt = list[no1].name;
+  image2.alt = list[no2].name;
+  image3.alt = list[no3].name;
+  list[no1].view++;
+  list[no2].view++;
+  list[no3].view++;
 }
 
-renderProduckImage();
-
-//eventlistener
-
-let pictures = document.getElementById('pictures');
-
-let resultList = document.getElementById('resultList');
+renderImg();
 
 
-let userClick = function (event) {
-  let clickDuck = event.target.alt;
-  for (let i = 0; i < listOfProducks.length; i++) {
-    if (clickDuck === listOfProducks[i].name) {
-      listOfProducks[i].numLike++;
+
+// add event listener
+
+let img = document.getElementById('img');
+
+
+let resultUl = document.getElementById('resultUl');
+
+
+
+let mouseClick = function (event) {
+  // console.log(event.target.alt);
+  let clickName = event.target.alt;
+  for (let i = 0; i < list.length; i++) {
+    if (clickName === list[i].name) {
+      list[i].like++;
       vote++;
-      console.log(listOfProducks[i].numLike);
+      console.log(list[i].like);
     }
   }
-
-  if (vote < userVote) {
-    renderProduckImage();
+  if (vote < maxVote) {
+    renderImg();
   } else {
-    pictures.removeEventListener('click', userClick);
-    alert('Click View Vote Result to see results.');
+    img.removeEventListener('click', mouseClick);
+    alert("Please click 'View Results' on the left.");
+    // render();
     viewResult.addEventListener('click', render);
-    renderProduckImage();
+    renderImg();
   }
+
 };
 
-pictures.addEventListener('click', userClick);
+img.addEventListener('click', mouseClick);
 
-//render result
+
+
+
+// render result
 let render = function () {
-  for (let j = 0; j < listOfProducks.length; j++) {
+  for (let j = 0; j < list.length; j++) {
     let newList = document.createElement('li');
-    newList.textContent = `${listOfProducks[j].numLike} votes, and was shown ${listOfProducks[j].numView} times.`;
-    resultList.appendChild(newList);
+    newList.textContent = `${list[j].name} has ${list[j].like} votes, and was seen ${list[j].view} times.`;
+    //banana had 3 votes, and was seen 5 times.
+    resultUl.appendChild(newList);
   }
 
   // save all data into a dataToString as string
-  let dataToString = JSON.stringify(listOfProducks);
+  let dataToString = JSON.stringify(list);
   console.log(dataToString);
-  localStorage(setItem)('saveAll', dataToString);
+  localStorage.setItem('saveAll', dataToString);
   viewResult.removeEventListener('click', render);
   finalChart();
+
 };
 
-let viewResult = document.getElementById('view-result');
+let viewResult = document.getElementById('view');
+
+// chart
 
 let finalChart = function () {
 
-  let listDuckName = [];
-  let listDuckView = [];
-  let listDuckLike = [];
 
-  for (let l = 0; l < listOfProducks.length; l++) {
-    listDuckName.push(listOfProducks[l].name);
-    console.log(listDuckName);
-    listDuckView.push(listOfProducks[l].numView);
-    listDuckLike.push(listOfProducks[l].numLike);
+
+  let listName = [];
+  let listView = [];
+  let listLike = [];
+
+  for (let l = 0; l < list.length; l++) {
+    listName.push(list[l].name);
+    // console.log(listName);
+    listView.push(list[l].view);
+    listLike.push(list[l].like);
   }
-};
 
-const chart = document.getElementById('myChart');
+  const ctx = document.getElementById('myChart');
 
-new Chart(chart, {
-  type: 'bar',
-  data: {
-    labels: listDuckName,
-    datasets: [{
-      label: '# of Views',
-      data: listDuckView,
-      borderWidth: 1
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: listName,
+      datasets: [{
+        label: '# of Views',
+        data: listView,
+        borderWidth: 1
+      },
+      {
+        label: '# of Likes',
+        data: listLike,
+        borderWidth: 1
+      }]
     },
-    {
-      label: '# of Likes',
-      data: listDuckLike,
-      borderWidth: 1
-    }]
-  },
 
-  options: {
-    indexAxis: 'y',
-    barThickness: '10',
-    borderRadius: '10',
-    borderWidth: 2,
-    scales: {
-      y: {
-        beginAtZero: true
+
+    options: {
+      indexAxis: 'y',
+
+      barThickness: '10',
+      borderRadius: '10',
+      borderWidth: 2,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
       }
     }
-  }
-});
+  });
+};
 
 function pageLoad() {
   let dataFromLocal = localStorage.getItem('saveAll');
   console.log(dataFromLocal);
   if (dataFromLocal) {
-    console.log(`data pull from storage ${dataFromLocal}`);
+    console.log(`data pull from sotrage ${dataFromLocal}`);
     let parsedData = JSON.parse(dataFromLocal);
     console.log(parsedData[0].name);
-    listOfProducks = parsedData;
+    list = parsedData;
+
+
+
   }
+
 }
