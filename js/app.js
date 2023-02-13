@@ -13,14 +13,12 @@ let image2 = document.querySelector('#img img:nth-child(2)');
 let image3 = document.querySelector('#img img:nth-child(3)');
 
 
-//constructor function for item
-// view, like are optional and default, doeesnt need an input
-function Item(name, src, view = 0, like = 0) {
+//constructor function for ducks
+function Duck(name, path) {
   this.name = name;
-  this.src = src;
-  // this.src = `img/${name}.jpg`;
-  this.view = view;
-  this.like = like;
+  this.path = path;
+  this.numView = 0;
+  this.numLike = 0;
 }
 
 
@@ -73,21 +71,25 @@ function renderImg() {
       console.log(`after check ${rngNoAr}`);
     }
   }
-  let no1 = rngNoAr.shift();
-  console.log(`take out no1 ${rngNoAr}`);
-  let no2 = rngNoAr.shift();
-  console.log(`take out no2 ${rngNoAr}`);
-  let no3 = rngNoAr.shift();
-  console.log(`take out no3 ${rngNoAr}`);
-  image1.src = list[no1].src;
-  image2.src = list[no2].src;
-  image3.src = list[no3].src;
-  image1.alt = list[no1].name;
-  image2.alt = list[no2].name;
-  image3.alt = list[no3].name;
-  list[no1].view++;
-  list[no2].view++;
-  list[no3].view++;
+
+  let pic1 = randomProducks.shift();
+  console.log(`remove pic1 ${randomProducks}`);
+  let pic2 = randomProducks.shift();
+  console.log(`remove pic2 ${randomProducks}`);
+  let pic3 = randomProducks.shift();
+  console.log(`remove pic3 ${randomProducks}`);
+
+  picture1.path = listOfProducks[pic1].path;
+  picture2.path = listOfProducks[pic2].path;
+  picture3.path = listOfProducks[pic3].path;
+
+  picture1.alt = listOfProducks[pic1].name;
+  picture2.alt = listOfProducks[pic2].name;
+  picture3.alt = listOfProducks[pic3].name;
+
+  listOfProducks[pic1].numView++;
+  listOfProducks[pic2].numView++;
+  listOfProducks[pic3].numView++;
 }
 
 renderImg();
@@ -167,24 +169,23 @@ let finalChart = function () {
     listLike.push(list[l].like);
   }
 
-  const ctx = document.getElementById('myChart');
+const duckChart = document.getElementById('myChart');
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: listName,
-      datasets: [{
-        label: '# of Views',
-        data: listView,
-        borderWidth: 1
-      },
-      {
-        label: '# of Likes',
-        data: listLike,
-        borderWidth: 1
-      }]
+new Chart(duckChart, {
+  type: 'bar',
+  data: {
+    labels: listDuckName,
+    datasets: [{
+      label: '# of Views',
+      data: listDuckView,
+      borderWidth: 1
     },
-
+    {
+      label: '# of Likes',
+      data: listDuckLike,
+      borderWidth: 1
+    }]
+  },
 
     options: {
       indexAxis: 'y',
