@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: beige;
+  background-color: whitesmoke;
 }
 header {
   display: flex;
@@ -37,7 +37,7 @@ h1 {
   border-style: double;
   border-color: black;
   border-width: 2px;
-  background-color: blanchedalmond;
+  background-color: rgb(35, 125, 52);
 }
 
 #img {
@@ -60,7 +60,7 @@ h1 {
 }
 
 #img img:hover {
-border: 3px solid rgb(67, 137, 157);
+border: 3px solid rgb(223, 10, 10);
 cursor: pointer;
 }
 
