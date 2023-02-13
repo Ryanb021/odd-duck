@@ -190,3 +190,4 @@ function pageLoad() {
     listOfProducks = parsedData;
   }
 }
+//dafuq is going on?
